@@ -1,7 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
+using MiniShopMVC.AutoMapper;
+using MiniShopMVC.Data;
+using MiniShopMVC.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(conf => conf.UseNpgsql(connection));
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 var app = builder.Build();
 
@@ -26,4 +38,7 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 
+using var scope = app.Services.CreateScope();
+await using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+await dbContext.Database.GetInfrastructure().GetService<IMigrator>()!.MigrateAsync();
 app.Run();

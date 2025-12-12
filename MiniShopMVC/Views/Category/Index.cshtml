@@ -1,0 +1,32 @@
+@model List<MiniShopMVC.Models.Entities.Category>
+
+@{
+    ViewData["Title"] = "Category";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Category Page</h1>
+    <p>Welcome to the Category Page of MiniShopMVC!</p>
+    <div class="mb-3 text-end">
+        <a href="@Url.Action("Create", "Category")" class="btn btn-primary">
+            Добавить категорию
+        </a>
+    </div>
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@category.Id</h5>
+                        <h5 class="card-title">@category.Name</h5>
+                        <form asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" method="post">
+                            <button style="border: none; border-radius: 10px;" type="submit">🗑️</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
