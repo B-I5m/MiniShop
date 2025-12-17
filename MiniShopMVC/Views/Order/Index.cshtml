@@ -1,0 +1,43 @@
+@model List<MiniShopMVC.Models.Entities.Order>
+
+@{
+    ViewData["Title"] = "Заказы";
+}
+
+<h1 class="display-4">Заказы</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    Создать заказ +
+</a>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Клиент</th>
+        <th>Телефон</th>
+        <th>Дата</th>
+        <th>Товары</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>@order.Id</td>
+            <td>@order.CustomerName</td>
+            <td>@order.CustomerPhone</td>
+            <td>@order.OrderDate</td>
+            <td>
+                @order.ProductOrders.Sum(p => p.Quantity)
+            </td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@order.Id" method="post">
+                    <button class="btn btn-sm btn-danger">⨯</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

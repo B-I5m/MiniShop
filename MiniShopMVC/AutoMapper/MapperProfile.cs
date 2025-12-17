@@ -2,13 +2,23 @@ using AutoMapper;
 using MiniShopMVC.Models;
 using MiniShopMVC.Models.Entities;
 
-namespace MiniShopMVC.AutoMapper;
-
-
-public class MapperProfile : Profile
+namespace MiniShopMVC.AutoMapper
 {
-    public MapperProfile()
+    public class MapperProfile : Profile
     {
-        CreateMap<CategoryAddViewModel, Category>();
+        public MapperProfile()
+        {
+            CreateMap<ProductAddViewModel, Product>();
+            CreateMap<CategoryAddViewModel, Category>();
+
+            CreateMap<CategoryUpdateViewModel, Category>();
+            CreateMap<ProductUpdateViewModel, Product>();
+            
+            CreateMap<OrderAddViewModel, Order>();
+            CreateMap<OrderUpdateViewModel, Order>();
+            
+
+        }
     }
 }
+    

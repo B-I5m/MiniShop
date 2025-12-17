@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MiniShopMVC.Models;
 
 namespace MiniShopMVC.Controllers;
@@ -23,18 +24,7 @@ public class HomeController : Controller
         return View();
     }
     
-    public IActionResult ContactUs()
-    {
-        var ourContact = new ContactViewModel
-        {
-            Phone = "+1-800-123-4567",
-            Email = "examle@mail.ru",
-            Address = "123 Main St, Anytown, USA"
-        };
-        
-        return View(ourContact);
-    }
-
+  
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

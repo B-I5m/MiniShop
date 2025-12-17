@@ -1,0 +1,24 @@
+@model MiniShopMVC.Models.OrderUpdateViewModel
+
+    @{
+    ViewData["Title"] = "Редактировать продукт";
+}
+
+<h2>Редактировать продукт</h2>
+
+    <form asp-action="Edit" method="post">
+    <input asp-for="Id" type="hidden" />
+
+    <div class="mb-3">
+    <label asp-for="Id" class="form-label">Название продукта</label>
+    <input asp-for="CustomerName" class="form-control" />
+    <input asp-for="CustomerPhone" class="form-control" />
+
+    </div>
+    
+
+    
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+    </form>

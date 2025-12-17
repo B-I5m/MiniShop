@@ -30,4 +30,26 @@ public class CategoryController(ICategoryService service): Controller
         var category = await service.DeleteCategoryAsync(id);
         return RedirectToAction("Index");
     }
+    public async Task<IActionResult> Edit(long id)
+    {
+        var category = await service.GetByIdAsync(id);
+        if (category == null) return NotFound();
+
+        return View(new CategoryUpdateViewModel
+        {
+            Id = category.Id,
+            Name = category.Name
+        });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(CategoryUpdateViewModel model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        await service.UpdateCategoryAsync(model);
+        return RedirectToAction("Index");
+    }
+
 }

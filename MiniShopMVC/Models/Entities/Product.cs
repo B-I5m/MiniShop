@@ -7,6 +7,5 @@ public class Product : BaseEntity
     public decimal Price { get; set; }
     public long CategoryId { get; set; }
     public Category Category { get; set; } = null!;
-    
     public ICollection<ProductOrder> ProductOrders { get; set; } = null!;
 }

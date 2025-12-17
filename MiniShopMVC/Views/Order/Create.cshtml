@@ -1,0 +1,46 @@
+@model MiniShopMVC.Models.OrderAddViewModel
+
+@{
+    ViewData["Title"] = "Создать заказ";
+}
+
+<h2>Создать заказ</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Имя клиента</label>
+        <input asp-for="CustomerName" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Телефон</label>
+        <input asp-for="CustomerPhone" class="form-control"/>
+    </div>
+
+    <hr/>
+
+    <h4>Товары</h4>
+
+    @for (int i = 0; i < Model.Products.Count; i++)
+    {
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <select asp-for="Products[i].ProductId"
+                        asp-items="ViewBag.Products"
+                        class="form-control">
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <input asp-for="Products[i].Quantity"
+                       class="form-control"
+                       placeholder="Кол-во"/>
+            </div>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-success mt-3">
+        Сохранить заказ
+    </button>
+</form>
